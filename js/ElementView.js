@@ -1,22 +1,47 @@
 //
 
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
+
+const ratings = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 class ElementView extends React.Component {
+  state = {
+    isFav: false,
+  }
+
+  onFavPress = () => {
+    this.setState((state) => {
+      return {
+        isFav: !state.isFav
+      }
+    })
+  }
+
   render() {
+    const { id } = this.props
+    const { isFav } = this.state
+    const lastCharOfId = id.substring(id.length - 1, id.length)
+    const ratingIndex = Number(lastCharOfId)
+    const rating = ratings[ratingIndex]
+
+    const favIconName = isFav ? 'ios-heart' : 'ios-heart-outline'
+
     return (
       <View style={styles.container}>
         <View style={styles.leftCol}>
-          <View style={styles.ratingLabel}>
-            <View />
+          <View style={styles.ratingLabelContainer}>
+            <Text style={styles.ratingLabel}>
+              {rating}
+            </Text>
           </View>
           <View style={styles.spacer}>
             <View />
           </View>
-          <View style={styles.favButton}>
-            <View />
-          </View>
+          <TouchableOpacity style={styles.favButtonContainer} onPress={this.onFavPress}>
+            <Icon name={favIconName} size={30} color="#900" />
+          </TouchableOpacity>
         </View>
         <View style={styles.midCol}>
           <View />
@@ -47,13 +72,20 @@ const styles = StyleSheet.create({
     width: 40,
     backgroundColor: 'green',
   },
-  ratingLabel: {
+  ratingLabelContainer: {
     height: 40,
     backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  favButton: {
+  ratingLabel: {
+    fontSize: 20,
+  },
+  favButtonContainer: {
     height: 40,
     backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   spacer: {
     flex: 1,
