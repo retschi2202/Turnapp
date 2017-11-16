@@ -1,7 +1,7 @@
 //
 
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 const ratings = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
@@ -44,7 +44,17 @@ class ElementView extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.midCol}>
-          <View />
+          <View style={styles.elementIdContainer}>
+            <Text style={styles.elementIdLabel}>
+              {id}
+            </Text>
+          </View>
+          <View style={styles.imageContainer}>
+          <Image source={require('../images/Test1.png')} style={styles.image} 
+          />
+          </View>
+          <View style={styles.titelContainer}>
+          </View>
         </View>
         <View style={styles.rightCol}>
           <View />
@@ -67,6 +77,28 @@ const styles = StyleSheet.create({
   midCol: {
     flex: 1,
     backgroundColor: 'orange',
+  },
+  elementIdContainer: {
+    height: 40,
+    backgroundColor: 'lightgreen',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  elementIdLabel: {
+    fontSize: 20,
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    aspectRatio: 1,
+  },
+  titelContainer: {
+    height: 40,
+    backgroundColor: 'lightgreen'
   },
   rightCol: {
     width: 40,
