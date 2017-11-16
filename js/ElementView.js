@@ -19,6 +19,13 @@ class ElementView extends React.Component {
     })
   }
 
+  onUpPress = () => {}
+
+  onDownPress = () => {}
+
+  onTrashPress = () => {}
+
+
   render() {
     const { element } = this.props
     const { id, title, description } = element
@@ -62,7 +69,15 @@ class ElementView extends React.Component {
             </View>
           </View>
           <View style={styles.rightCol}>
-            <View />
+            <TouchableOpacity style={styles.upButtonContainer} onPress={this.onUpPress}>
+              <Icon name="ios-arrow-up-outline" size={30} color="#5b80d9" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.trashButtonContainer} onPress={this.onTrashPress}>
+              <Icon name="ios-trash-outline" size={30} color="#5b80d9" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.downButtonContainer} onPress={this.onDownPress}>
+              <Icon name="ios-arrow-down-outline" size={30} color="#5b80d9" />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.descriptionContainer}>
@@ -140,13 +155,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   spacer: {
-    flex: 1,
+    flex: 1
   },
   elementDescription: {
-    fontSize: 15,
+    fontSize: 15
   },
   titleLabel: {
-    fontSize: 20,
+    fontSize: 20
+  },
+  upButtonContainer: {
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  trashButtonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  downButtonContainer: {
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
