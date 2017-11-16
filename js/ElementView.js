@@ -20,7 +20,8 @@ class ElementView extends React.Component {
   }
 
   render() {
-    const { id } = this.props
+    const { element } = this.props
+    const { id, title, description } = element
     const { isFav } = this.state
     const lastCharOfId = id.substring(id.length - 1, id.length)
     const ratingIndex = Number(lastCharOfId)
@@ -30,34 +31,44 @@ class ElementView extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.leftCol}>
-          <View style={styles.ratingLabelContainer}>
-            <Text style={styles.ratingLabel}>
-              {rating}
-            </Text>
+        <View style={styles.mainContainer}>
+          <View style={styles.leftCol}>
+            <View style={styles.ratingLabelContainer}>
+              <Text style={styles.ratingLabel}>
+                {rating}
+              </Text>
+            </View>
+            <View style={styles.spacer}>
+              <View />
+            </View>
+            <TouchableOpacity style={styles.favButtonContainer} onPress={this.onFavPress}>
+              <Icon name={favIconName} size={30} color="#900" />
+            </TouchableOpacity>
           </View>
-          <View style={styles.spacer}>
+          <View style={styles.midCol}>
+            <View style={styles.elementIdContainer}>
+              <Text style={styles.elementIdLabel}>
+                {id}
+              </Text>
+            </View>
+            <View style={styles.imageContainer}>
+            <Image source={require('../images/Test1.png')} style={styles.image} 
+            />
+            </View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.titleLabel}>
+                {title}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.rightCol}>
             <View />
           </View>
-          <TouchableOpacity style={styles.favButtonContainer} onPress={this.onFavPress}>
-            <Icon name={favIconName} size={30} color="#900" />
-          </TouchableOpacity>
         </View>
-        <View style={styles.midCol}>
-          <View style={styles.elementIdContainer}>
-            <Text style={styles.elementIdLabel}>
-              {id}
-            </Text>
-          </View>
-          <View style={styles.imageContainer}>
-          <Image source={require('../images/Test1.png')} style={styles.image} 
-          />
-          </View>
-          <View style={styles.titelContainer}>
-          </View>
-        </View>
-        <View style={styles.rightCol}>
-          <View />
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.elementDescription}>
+            {description}
+          </Text>
         </View>
       </View>
     )
@@ -66,9 +77,16 @@ class ElementView extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
+  },
+  mainContainer: {
     height: 300,
     backgroundColor: 'red',
     flexDirection: 'row',
+  },
+  descriptionContainer: {
+    backgroundColor: 'blue',
+    padding: 12
   },
   leftCol: {
     width: 40,
@@ -77,6 +95,10 @@ const styles = StyleSheet.create({
   midCol: {
     flex: 1,
     backgroundColor: 'orange',
+  },
+  rightCol: {
+    width: 40,
+    backgroundColor: 'green',
   },
   elementIdContainer: {
     height: 40,
@@ -96,13 +118,11 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
   },
-  titelContainer: {
+  titleContainer: {
     height: 40,
-    backgroundColor: 'lightgreen'
-  },
-  rightCol: {
-    width: 40,
-    backgroundColor: 'green',
+    backgroundColor: 'lightgreen',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   ratingLabelContainer: {
     height: 40,
@@ -122,6 +142,12 @@ const styles = StyleSheet.create({
   spacer: {
     flex: 1,
   },
+  elementDescription: {
+    fontSize: 15,
+  },
+  titleLabel: {
+    fontSize: 20,
+  }
 })
 
 export default ElementView
